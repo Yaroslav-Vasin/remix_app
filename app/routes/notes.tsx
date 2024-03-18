@@ -5,11 +5,12 @@
 //     </main>
 //   )
 // };
+import NewNote from "~/components/NewNote";
 
 export default function NotesPage() {
   return (
     <main>
-      <h1>My notes</h1>
+      <NewNote />
     </main>
   )
-};
+}
