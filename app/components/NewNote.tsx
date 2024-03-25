@@ -1,6 +1,7 @@
-import { Form, useNavigation } from "@remix-run/react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 
 function NewNote() {
+  const data = useActionData();
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
@@ -11,6 +12,7 @@ function NewNote() {
       id="note-form"
       className="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md"
     >
+      {data?.message && <p>{data.message}</p>}
       <p>
         <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
           Title
