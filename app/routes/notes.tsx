@@ -36,21 +36,25 @@ export async function loader() {
 
 export async function action({ request }: { request: any }) {
   const formData = await request.formData();
-  const nateData = Object.fromEntries(formData);
+  const noteData = Object.fromEntries(formData);
+
+  const lengthError = "Title must be at least 5 characters";
+  const lengthKey = "message";
 
   // validation
-  if (nateData.title.trim().length < 5) {
-    return { message: "Title must be at least 5 characters long" };
+  if (noteData.title.trim().length < 5) {
+    noteData[lengthKey] = lengthError;
+    return noteData;
   }
 
   const existingNotes = await getStoredNotes();
-  nateData.id = new Date().toISOString();
-  const updatedNotes = existingNotes.concat(nateData);
+  noteData.id = new Date().toISOString();
+  const updatedNotes = existingNotes.concat(noteData);
   await storeNotes(updatedNotes);
 
   // redirect user to notes page
   return redirect("/notes");
-  // const nateData = {
+  // const noteData = {
   //   title: formData.get("title"),
   //   content: formData.get("content"),
   // };
@@ -64,11 +68,11 @@ export function ErrorBoundary() {
     return (
       <div>
         <NewNote />
-        <h1>Oops</h1>
-        <p>Status: {error.status}</p>
+        <h1>Unfortunately we received a {error.status} status when requesting your notes, you can return to the homepage or create a new contact. </h1>
+        <p>Status: </p>
         <p>{error.data.message}</p>
         <p>
-          Back to <Link to={"/"}>safe</Link>
+          Back to <Link to={"/"}>home</Link>
         </p>
       </div>
     );

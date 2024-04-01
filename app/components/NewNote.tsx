@@ -1,10 +1,19 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 
+interface Data {
+  title?: string
+  content?: string
+  message?: string
+}
+
 function NewNote() {
-  const data = useActionData();
+  const data = useActionData<Data>();
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
+
+  console.log("isSubmitting =>>>>>", isSubmitting);
+  
 
   return (
     <Form

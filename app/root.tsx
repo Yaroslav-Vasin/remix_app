@@ -47,7 +47,7 @@ export function ErrorBoundary() {
     return (
       <div>
         <NewNote />
-        <h1>Oops</h1>
+        <h1>Oops Root</h1>
         <p>Status: {error.status}</p>
         <p>{error.data.message}</p>
         <p>
