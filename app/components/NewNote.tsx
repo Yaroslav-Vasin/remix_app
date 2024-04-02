@@ -11,10 +11,7 @@ function NewNote() {
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
-
-  console.log("isSubmitting =>>>>>", isSubmitting);
   
-
   return (
     <Form
       method="post"

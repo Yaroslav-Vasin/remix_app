@@ -10,8 +10,23 @@ import NewNote from "~/components/NewNote";
 import NoteList from "~/components/NoteList";
 import { getStoredNotes, storeNotes } from "~/data/notes";
 
+interface Note {
+  id: string;
+  content: string;
+  title: string;
+}
+
+export function meta(): { title: string; description: string }[] {
+  return [
+    {
+      title: "All notes",
+      description: "A list of notes",
+    },
+  ];
+}
+
 export default function NotesPage() {
-  const notes = useLoaderData();
+  const notes: Note[] = useLoaderData();
 
   return (
     <main>
@@ -68,9 +83,11 @@ export function ErrorBoundary() {
     return (
       <div>
         <NewNote />
-        <h1>Unfortunately we received a {error.status} status when requesting your notes, you can return to the homepage or create a new contact. </h1>
-        <p>Status: </p>
-        <p>{error.data.message}</p>
+        <h1>
+          Unfortunately we received a {error.status} status:{" "}
+          {error.data.message}. You can return to the homepage or create a new
+          contact.{" "}
+        </h1>
         <p>
           Back to <Link to={"/"}>home</Link>
         </p>

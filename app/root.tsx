@@ -44,12 +44,12 @@ export function ErrorBoundary() {
 
   // when true, this is what used to go to `CatchBoundary`
   if (isRouteErrorResponse(error)) {
+    
     return (
       <div>
-        <NewNote />
         <h1>Oops Root</h1>
         <p>Status: {error.status}</p>
-        <p>{error.data.message}</p>
+        <p>{error.data}</p>
         <p>
           Back to <Link to={"/"}>safe</Link>
         </p>
